@@ -46,5 +46,14 @@ public class ToDoListController {
         return task;
     }
 
+    @DeleteMapping("tasks/{id}")
+    public void deleteTask(@PathVariable int id) {
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                tasks.remove(task);
+            }
+        }
+    }
+
 
 }
