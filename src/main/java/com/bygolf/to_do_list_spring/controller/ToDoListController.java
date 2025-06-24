@@ -1,6 +1,7 @@
 package com.bygolf.to_do_list_spring.controller;
 
 import com.bygolf.to_do_list_spring.model.Task;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class ToDoListController {
     }
 
     @PostMapping("/tasks/")
-    public Task addTask(Task task) {
+    public Task addTask(@Valid Task task) {
         tasks.add(task);
         return task;
     }

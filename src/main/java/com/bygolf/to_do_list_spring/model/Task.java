@@ -1,5 +1,8 @@
 package com.bygolf.to_do_list_spring.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -7,7 +10,9 @@ public class Task {
 
     private static int idCounter = 1;
     private final int id;
+    @NotBlank
     private String title;
+    @NotBlank
     private String description;
     private boolean completed;
     private final Date createdAt;
