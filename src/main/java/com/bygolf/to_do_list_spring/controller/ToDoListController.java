@@ -55,5 +55,19 @@ public class ToDoListController {
         }
     }
 
+    @PutMapping("tasks/{id}")
+    public Task markTaskAsComplete(@PathVariable int id) {
+
+        Task tempTask = null;
+
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                task.markAsComplete();
+                tempTask = task;
+            }
+        }
+        return tempTask;
+    }
+
 
 }
