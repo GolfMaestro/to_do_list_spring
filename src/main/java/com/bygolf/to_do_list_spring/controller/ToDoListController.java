@@ -1,5 +1,6 @@
 package com.bygolf.to_do_list_spring.controller;
 
+import com.bygolf.to_do_list_spring.service.ToDoListService;
 import com.bygolf.to_do_list_spring.model.Task;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 @RestController
 public class ToDoListController {
 
-    private ArrayList<Task> tasks = new ArrayList<>();
+    ToDoListService toDoListService = new ToDoListService();
 
     @GetMapping("/")
     public String helloPage() {
@@ -23,52 +24,29 @@ public class ToDoListController {
 
     @GetMapping("/tasks")
     public ArrayList<Task> getTasks() {
-        return tasks;
+        return toDoListService.getTasks();
     }
 
     @GetMapping("/tasks/{id}")
     public Task getTaskById(@PathVariable int id) {
-        Task tempTask = null;
-
-        for (Task task : tasks) {
-            if (task.getId() == id) {
-                tempTask = task;
-                break;
-            }
-        }
-
-        return tempTask;
+        return toDoListService.getTask(id);
 
     }
 
     @PostMapping("/tasks/")
     public Task addTask(@Valid Task task) {
-        tasks.add(task);
-        return task;
+        return toDoListService.addTask(task);
     }
 
     @DeleteMapping("tasks/{id}")
     public void deleteTask(@PathVariable int id) {
-        for (Task task : tasks) {
-            if (task.getId() == id) {
-                tasks.remove(task);
-            }
-        }
+        toDoListService.removeTask(id);
     }
 
     @PutMapping("tasks/{id}")
     public Task markTaskAsComplete(@PathVariable int id) {
 
-        Task tempTask = null;
-
-        for (Task task : tasks) {
-            if (task.getId() == id) {
-                task.markAsComplete();
-                tempTask = task;
-            }
-        }
-        return tempTask;
+        return toDoListService.markAsComplete(id);
     }
-
 
 }
