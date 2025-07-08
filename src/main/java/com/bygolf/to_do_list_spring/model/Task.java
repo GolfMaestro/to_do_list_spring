@@ -1,31 +1,34 @@
 package com.bygolf.to_do_list_spring.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 
-import java.util.Date;
-import java.util.UUID;
+import java.time.LocalDateTime;
+    @Entity
+    @Table(name = "tasks")
+    public class Task {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+        @NotBlank
+        private String title;
+        private String description;
+        private boolean completed;
+        @Column(name = "created_at", updatable = false)
+        private LocalDateTime createdAt;
 
-public class Task {
+        public Task() {
 
-    private static int idCounter = 1;
-    private final int id;
-    @NotBlank
-    private String title;
-    @NotBlank
-    private String description;
-    private boolean completed;
-    private final Date createdAt;
+        }
 
-    public Task(String title, String description) {
-        this.id = idCounter++;
-        this.title = title;
-        this.description = description;
-        this.completed = false;
-        this.createdAt = new Date();
-    }
+        public Task(String title, String description) {
+            this.title = title;
+            this.description = description;
+            this.completed = false;
+//            this.createdAt = LocalDateTime.now();
+        }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -45,7 +48,7 @@ public class Task {
         this.description = description;
     }
 
-    public boolean isCompleted() {
+    public boolean getCompleted() {
         return completed;
     }
 
@@ -57,8 +60,14 @@ public class Task {
         this.completed = false;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
+    @PrePersist
+    private void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
 
 }

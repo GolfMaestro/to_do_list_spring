@@ -1,16 +1,22 @@
-package com.bygolf.to_do_list_spring.controller;
+package com.bygolf.to_do_list_spring.web;
 
 import com.bygolf.to_do_list_spring.service.ToDoListService;
 import com.bygolf.to_do_list_spring.model.Task;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class ToDoListController {
 
-    ToDoListService toDoListService = new ToDoListService();
+    ToDoListService toDoListService;
+
+    @Autowired
+    public ToDoListController(ToDoListService toDoListService) {
+        this.toDoListService = toDoListService;
+    }
 
     @GetMapping("/")
     public String helloPage() {
@@ -23,7 +29,7 @@ public class ToDoListController {
     }
 
     @GetMapping("/tasks")
-    public ArrayList<Task> getTasks() {
+    public List<Task> getTasks() {
         return toDoListService.getTasks();
     }
 
