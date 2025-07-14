@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class ToDoListController {
 
     ToDoListService toDoListService;
@@ -23,11 +24,6 @@ public class ToDoListController {
         return "Hello! This is to do app";
     }
 
-    @GetMapping("/debug")
-    public String debug() {
-        return "How did you get here?";
-    }
-
     @GetMapping("/tasks")
     public List<Task> getTasks() {
         return toDoListService.getTasks();
@@ -39,17 +35,17 @@ public class ToDoListController {
 
     }
 
-    @PostMapping("/tasks/")
+    @PostMapping("/tasks")
     public Task addTask(@Valid Task task) {
         return toDoListService.addTask(task);
     }
 
-    @DeleteMapping("tasks/{id}")
+    @DeleteMapping("/tasks/{id}")
     public void deleteTask(@PathVariable int id) {
         toDoListService.removeTask(id);
     }
 
-    @PutMapping("tasks/{id}")
+    @PutMapping("/tasks/{id}")
     public Task markTaskAsComplete(@PathVariable int id) {
 
         return toDoListService.markAsComplete(id);

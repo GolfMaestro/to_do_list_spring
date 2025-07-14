@@ -28,46 +28,46 @@ import java.time.LocalDateTime;
 //            this.createdAt = LocalDateTime.now();
         }
 
-    public long getId() {
-        return id;
-    }
+        public long getId() {
+            return id;
+        }
 
-    public String getTitle() {
-        return title;
-    }
+        public String getTitle() {
+            return title;
+        }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+        public void setTitle(String title) {
+            this.title = title;
+        }
 
-    public String getDescription() {
-        return description;
-    }
+        public String getDescription() {
+            return description;
+        }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+        public void setDescription(String description) {
+            this.description = description;
+        }
 
-    public boolean getCompleted() {
-        return completed;
-    }
+        public boolean getCompleted() {
+            return completed;
+        }
 
-    public void markAsComplete() {
-        this.completed = true;
-    }
+        public void markAsComplete() {
+            this.completed = true;
+        }
 
-    public void markAsNotComplete() {
-        this.completed = false;
-    }
+        public void markAsNotComplete() {
+            this.completed = false;
+        }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+        public LocalDateTime getCreatedAt() {
+            return createdAt;
+        }
 
-    @PrePersist
-    private void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
+        @PrePersist
+        private void onCreate() {
+            this.createdAt = LocalDateTime.now();
+        }
 
 
 }
