@@ -19,10 +19,12 @@ public class ToDoListService {
     private TaskRepository taskRepository;
 
     public List<Task> getTasks() {
+        logger.debug("Receiving all tasks");
         return taskRepository.findAll();
     }
 
     public Task getTask(int id) {
+        logger.debug("Receiving task by id: {}", id);
         Task tempTask = null;
         List<Task> localTasks = taskRepository.findAll();
         for (Task task : localTasks) {
@@ -30,6 +32,12 @@ public class ToDoListService {
                 tempTask = task;
                 break;
             }
+        }
+        if (tempTask != null) {
+            logger.info("Task found with id: {}", id);
+        }
+        else {
+            logger.info("Task not found with id: {}", id);
         }
         return tempTask;
     }
@@ -48,23 +56,38 @@ public class ToDoListService {
     }
 
     public void removeTask(int id) {
+        logger.debug("Removing task with id: {}", id);
         List<Task> localTasks = taskRepository.findAll();
         for (Task task : localTasks) {
             if (task.getId() == id) {
-                taskRepository.delete(task);
+                try {
+                    taskRepository.delete(task);
+                    logger.info("Task successfully removed. ID: {}", id);
+                } catch (Exception e) {
+                    logger.error("Error removing task with this id: {}", id);
+                    throw e;
+                }
+
                 break;
             }
         }
     }
 
     public Task markAsComplete(int id) {
+        logger.debug("Marking task as complete with this id: {}", id);
         Task tempTask = null;
         List<Task> localTasks = taskRepository.findAll();
         for (Task task : localTasks) {
             if (task.getId() == id) {
-                task.markAsComplete();
-                taskRepository.save(task);
-                tempTask = task;
+                try {
+                    task.markAsComplete();
+                    taskRepository.save(task);
+                    tempTask = task;
+                    logger.info("Task successfully marked as complete. ID: {}", id);
+                } catch (Exception e) {
+                    logger.error("Error marking task as complete. ID: {}", id);
+                    throw e;
+                }
                 break;
             }
         }
