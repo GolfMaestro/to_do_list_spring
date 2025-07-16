@@ -5,11 +5,15 @@ import com.bygolf.to_do_list_spring.model.Task;
 import com.bygolf.to_do_list_spring.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @Service
 public class ToDoListService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ToDoListService.class);
 
     @Autowired
     private TaskRepository taskRepository;
@@ -31,7 +35,15 @@ public class ToDoListService {
     }
 
     public Task addTask(Task task) {
-        taskRepository.save(task);
+        logger.debug("Creating new task: {}", task.getTitle());
+        try {
+            Task savedTask = taskRepository.save(task);
+            logger.info("Task created successfully with ID: {}", savedTask.getId());
+        } catch (Exception e) {
+            logger.error("Error creating task with this title: {}", task.getTitle());
+            throw e;
+        }
+
         return task;
     }
 
