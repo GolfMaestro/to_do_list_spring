@@ -1,14 +1,12 @@
 # How to run app
 
 1. Clone repository
-2. Open it with IntelliJ IDEA
-3. Configure JDK (JDK22)
-4. Run ToDoListSpringApplication.java
-
+2. Run docker compose up
 
 ## API endpoints
-- GET /tasks — get list of tasks.
-- GET /tasks/{id} - get task by id
-- POST /tasks - add new task
-- DELETE /tasks/{id} - delete task by id
-- PUT /tasks/{id} - change task status
+
+- GET api/tasks — get list of tasks.
+- GET api/tasks/{id} - get task by id
+- POST api/tasks - add new task
+- DELETE api/tasks/{id} - delete task by id
+- PUT api/tasks/{id} - change task status
