@@ -56,6 +56,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>4.29.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -63,6 +68,18 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>4.31.1</version> <!-- Match the error version -->
+				<configuration>
+					<changeLogFile>src/main/resources/db/changelog/db.changelog-master.yaml</changeLogFile>
+					<url>jdbc:postgresql://localhost:5432/eshop</url> <!-- Use Spring's datasource URL -->
+					<username>${SPRING_DATASOURCE_USERNAME}</username>
+					<password>${SPRING_DATASOURCE_PASSWORD}</password>
+					<driver>org.postgresql.Driver</driver>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
