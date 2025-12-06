@@ -5,7 +5,7 @@ databaseChangeLog:
       changes:
         - createTable:
             tableName: tasks
-            remarks: Таблица для хранения задач (to-do)
+            remarks: Table to store tasks
             columns:
               - column:
                   name: id
@@ -37,3 +37,11 @@ databaseChangeLog:
                   defaultValueComputed: now()
                   constraints:
                     nullable: false
+              - column:
+                  name: person_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_tasks_person_id
+                    references: persons(id)
+                    deleteCascade: true

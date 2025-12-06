@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
+
+        @Column(name = "person_id")
+        private Long personId;
         @NotBlank
         private String title;
         private String description;
