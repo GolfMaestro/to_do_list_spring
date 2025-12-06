@@ -34,10 +34,15 @@ public class ToDoListController {
         return "Hello! This is to do app";
     }
 
+//    @GetMapping("/tasks")
+//    public List<Task> getTasks() {
+//        logger.info("Received request to get all tasks");
+//        return toDoListService.getTasks();
+//    }
+
     @GetMapping("/tasks")
-    public List<Task> getTasks() {
-        logger.info("Received request to get all tasks");
-        return toDoListService.getTasks();
+    public List<Task> getPersonTasks(@RequestParam("personId") Long personId) {
+        return toDoListService.getPersonTasks(personId);
     }
 
     @GetMapping("/tasks/{id}")
@@ -50,6 +55,8 @@ public class ToDoListController {
     @PostMapping("/tasks")
     public Task addTask(@Valid Task task) {
         logger.info("Received request to add task with title: {}", task.getTitle());
+        logger.info("Received request to add task with desc: {}", task.getDescription());
+        logger.info("Received request to add task with person_id: {}", task.getPersonId());
         return toDoListService.addTask(task);
     }
 

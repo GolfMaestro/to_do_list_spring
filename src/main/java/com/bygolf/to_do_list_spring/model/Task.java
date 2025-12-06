@@ -24,11 +24,11 @@ import java.time.LocalDateTime;
 
         }
 
-        public Task(String title, String description) {
+        public Task(Long personId, String title, String description) {
+            this.personId = personId;
             this.title = title;
             this.description = description;
             this.completed = false;
-//            this.createdAt = LocalDateTime.now();
         }
 
         public long getId() {
@@ -49,6 +49,14 @@ import java.time.LocalDateTime;
 
         public void setDescription(String description) {
             this.description = description;
+        }
+
+        public Long getPersonId() {
+            return personId;
+        }
+
+        public void setPersonId(Long personId) {
+            this.personId = personId;
         }
 
         public boolean getCompleted() {

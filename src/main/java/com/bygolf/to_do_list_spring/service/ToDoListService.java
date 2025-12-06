@@ -42,6 +42,11 @@ public class ToDoListService {
         return tempTask;
     }
 
+    public List<Task> getPersonTasks(long personId) {
+        logger.debug("Receiving task by personid: {}", personId);
+        return taskRepository.findByPersonId(personId);
+    }
+
     public Task addTask(Task task) {
         logger.debug("Creating new task: {}", task.getTitle());
         try {

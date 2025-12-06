@@ -24,7 +24,7 @@ class ToDoListSpringApplicationTests {
 
 	@Test
 	void testCreateTask() {
-		Task task = new Task("task1", "task1 extended");
+		Task task = new Task(1L, "task1", "task1 extended");
 
 		when(taskRepository.save(any(Task.class))).thenReturn(task);
 
